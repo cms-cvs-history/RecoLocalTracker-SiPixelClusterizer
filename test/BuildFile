@@ -1,0 +1,19 @@
+<use name=FWCore/Framework>
+<use name=FWCore/EDProduct>
+<use name=FWCore/ParameterSet>
+<use name=Foundation/PluginManager>
+#<use name=RecoLocalTracker/SiPixelRecHits>
+<use name=clhep>
+<use name=boost>
+<use name=root>
+
+# for clusters 
+<use name=Geometry/Records>
+<use name=DataFormats/DetId>
+<use name=RecoLocalTracker/SiPixelClusterizer>
+
+# from digis
+<flags SEAL_PLUGIN_NAME="ReadPixClusters">
+<library file="ReadPixClusters.cc" name="ReadPixClusters">
+</library>
+ 
