@@ -1,5 +1,5 @@
     module pixClust =  SiPixelClusterProducer {
-#        untracked string DigiProducer = "pixdigi"	
+         InputTag src = pixdigi
 #	 untracked string ClusterMode  = "PixelThresholdClusterizer"
          int32 ChannelThreshold = 2500
          int32 SeedThreshold    = 3000
