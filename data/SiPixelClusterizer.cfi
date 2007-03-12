@@ -1,3 +1,5 @@
+#include SiStripNoiseService parameters
+include "CondTools/SiPixel/data/SiPixelGainCalibrationService.cfi"
 
     module siPixelClusters =  SiPixelClusterProducer {
          InputTag src = siPixelDigis
@@ -7,4 +9,12 @@
          double ClusterThreshold = 5050
          untracked bool MissCalibrate   = true
 	 untracked int32 VerbosityLevel = 1		 
+
+	using SiPixelGainCalibrationServiceParameters
     }
+
+replace siPixelClusters.UseCalibDataFromDB = false
+
+
+
+
