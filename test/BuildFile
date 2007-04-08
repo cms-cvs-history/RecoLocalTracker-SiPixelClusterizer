@@ -1,7 +1,7 @@
 <use name=FWCore/Framework>
 <use name=DataFormats/Common>
 <use name=FWCore/ParameterSet>
-<use name=Foundation/PluginManager>
+<use name=FWCore/PluginManager>
 #<use name=RecoLocalTracker/SiPixelRecHits>
 <use name=clhep>
 <use name=boost>
