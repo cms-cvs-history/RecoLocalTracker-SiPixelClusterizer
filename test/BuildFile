@@ -13,7 +13,7 @@
 <use name=RecoLocalTracker/SiPixelClusterizer>
 
 # from digis
-<flags SEAL_PLUGIN_NAME="ReadPixClusters">
+<flags EDM_PLUGIN=1>
 <library file="ReadPixClusters.cc" name="ReadPixClusters">
 </library>
  
