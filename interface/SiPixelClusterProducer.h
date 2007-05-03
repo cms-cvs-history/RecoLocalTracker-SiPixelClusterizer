@@ -1,6 +1,8 @@
 #ifndef RecoLocalTracker_SiPixelClusterizer_SiPixelClusterProducer_h
 #define RecoLocalTracker_SiPixelClusterizer_SiPixelClusterProducer_h
 
+// Special version for the HLT branch. dk 05/07
+
 //---------------------------------------------------------------------------
 //! \class SiPixelClusterProducer
 //!
@@ -71,7 +73,6 @@ namespace cms
 
     //--- Execute the algorithm(s).
     void run(const edm::DetSetVector<PixelDigi> & input,
-	     SiPixelClusterCollection           & output,
 	     edm::ESHandle<TrackerGeometry>     & geom);
 
   private:
@@ -81,6 +82,7 @@ namespace cms
     PixelClusterizerBase * clusterizer_;    // what we got (for now, one ptr to base class)
     bool readyToCluster_;                   // needed clusterizers valid => good to go!
     edm::InputTag src_;
+    std::vector<edm::DetSet<SiPixelCluster> > theClusterVector; // cache to hold all clusters
   };
 }
 
