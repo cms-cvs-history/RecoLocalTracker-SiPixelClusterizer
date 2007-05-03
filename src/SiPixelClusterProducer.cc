@@ -77,15 +77,16 @@ namespace cms
     edm::ESHandle<TrackerGeometry> geom;
     es.get<TrackerDigiGeometryRecord>().get( geom );
 
-
-    // Step B: create empty output collection
-    std::auto_ptr< SiPixelClusterCollection > 
-      output( new SiPixelClusterCollection );
-
-    // Step C: Iterate over DetIds and invoke the strip clusterizer algorithm
+    // Step B: Iterate over DetIds and invoke the strip clusterizer algorithm
     // on each DetUnit
     //run(*input, *output, geom );
     run(*input, geom );
+
+    // Step C: create the final output collection
+    std::auto_ptr< SiPixelClusterCollection >
+      output( new SiPixelClusterCollection (theClusterVector));
+
+
 
     // Step D: write output to file
     e.put( output );
