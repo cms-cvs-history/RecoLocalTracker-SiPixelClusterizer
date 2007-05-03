@@ -84,7 +84,8 @@ namespace cms
 
     // Step C: Iterate over DetIds and invoke the strip clusterizer algorithm
     // on each DetUnit
-    run(*input, *output, geom );
+    //run(*input, *output, geom );
+    run(*input, geom );
 
     // Step D: write output to file
     e.put( output );
@@ -116,8 +117,7 @@ namespace cms
   //---------------------------------------------------------------------------
   //!  Iterate over DetUnits, and invoke the PixelClusterizer on each.
   //---------------------------------------------------------------------------
-  void SiPixelClusterProducer::run(const edm::DetSetVector<PixelDigi>& input, 
-				   SiPixelClusterCollection & output,
+  void SiPixelClusterProducer::run(const edm::DetSetVector<PixelDigi>& input,
 				   edm::ESHandle<TrackerGeometry> & geom) {
     if ( ! readyToCluster_ ) {
       edm::LogError("SiPixelClusterProducer")
@@ -154,7 +154,8 @@ namespace cms
       edm::DetSet<SiPixelCluster> spc(DSViter->id);
       clusterizer_->clusterizeDetUnit(*DSViter, pixDet, badChannels, spc);
       if( spc.data.size() > 0) {
-	output.insert( spc );
+	//output.insert( spc );
+	theClusterVector.push_back( spc );  // fill the cache
 	numberOfClusters += spc.data.size();
       }
 
