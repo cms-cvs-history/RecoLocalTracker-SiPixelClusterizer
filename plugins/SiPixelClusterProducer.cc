@@ -1,6 +1,3 @@
-
-// Special versino for the HLT branch. dk 05/07
-
 /** SiPixelClusterProducer.cc
  * ---------------------------------------------------------------
  * Description:  see SiPixelClusterProducer.h
@@ -9,6 +6,8 @@
  * Get rid of the noiseVector. d.k. 28/3/06
  * Implementation of the DetSetVector container.    V.Chiochia, May 06
  * SiPixelClusterCollection typedef of DetSetVector V.Chiochia, June 06
+ * Introduce the DetSet local container (cache) for speed. d.k. 05/07
+ * 
  * ---------------------------------------------------------------
  */
 
@@ -26,7 +25,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 
 // Framework
-#include "FWCore/Framework/interface/Handle.h"
+#include "DataFormats/Common/interface/Handle.h"
 #include "FWCore/Framework/interface/ESHandle.h"
 
 // STL
@@ -47,6 +46,7 @@ namespace cms
   SiPixelClusterProducer::SiPixelClusterProducer(edm::ParameterSet const& conf) 
     : 
     conf_(conf),
+    theSiPixelGainCalibration_(conf),
     clusterMode_("None"),     // bogus
     clusterizer_(0),          // the default, in case we fail to make one
     readyToCluster_(false),   // since we obviously aren't
@@ -65,12 +65,20 @@ namespace cms
     delete clusterizer_;
   }  
 
+  void SiPixelClusterProducer::beginJob( const edm::EventSetup& es ) {
+    edm::LogInfo("SiPixelClusterizer") << "[SiPixelClusterizer::beginJob]";
+    clusterizer_->setSiPixelGainCalibrationService(& theSiPixelGainCalibration_);
+  }
 
   //---------------------------------------------------------------------------
   //! The "Event" entrypoint: gets called by framework for every event
   //---------------------------------------------------------------------------
   void SiPixelClusterProducer::produce(edm::Event& e, const edm::EventSetup& es)
   {
+
+    //Setup gain calibration service
+    theSiPixelGainCalibration_.setESObjects( es );
+
    // Step A.1: get input data
     //edm::Handle<PixelDigiCollection> pixDigis;
     edm::Handle< edm::DetSetVector<PixelDigi> >  input;
@@ -80,13 +88,14 @@ namespace cms
     edm::ESHandle<TrackerGeometry> geom;
     es.get<TrackerDigiGeometryRecord>().get( geom );
 
-    // Step B: Iterate over DetIds and invoke the strip clusterizer algorithm
+    // Step B: Iterate over DetIds and invoke the pixel clusterizer algorithm
     // on each DetUnit
     run(*input, geom );
 
     // Step C: create the final output collection
     std::auto_ptr< SiPixelClusterCollection > 
       output( new SiPixelClusterCollection (theClusterVector));
+
 
     // Step D: write output to file
     e.put( output );
@@ -155,7 +164,7 @@ namespace cms
       edm::DetSet<SiPixelCluster> spc(DSViter->id);
       clusterizer_->clusterizeDetUnit(*DSViter, pixDet, badChannels, spc);
       if( spc.data.size() > 0) {
-	//output.insert( spc );
+	//output.insert( spc );  // very slow
 	theClusterVector.push_back( spc );  // fill the cache
 	numberOfClusters += spc.data.size();
       }
