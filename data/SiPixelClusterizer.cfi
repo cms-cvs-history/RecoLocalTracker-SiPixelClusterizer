@@ -13,7 +13,10 @@ include "CondTools/SiPixel/data/SiPixelGainCalibrationService.cfi"
 	using SiPixelGainCalibrationServiceParameters
     }
 
-replace siPixelClusters.UseCalibDataFromDB = false
+# Uncomment the line below to use the Gain Calibration from DB. 
+# Nota Bene: Only for private DB tests for the moment
+#
+#replace siPixelClusters.UseCalibDataFromDB = true
 
 
 
