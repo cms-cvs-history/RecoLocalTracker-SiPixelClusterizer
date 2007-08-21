@@ -3,7 +3,6 @@ include "CondTools/SiPixel/data/SiPixelGainCalibrationService.cfi"
 
     module siPixelClusters =  SiPixelClusterProducer {
          InputTag src = siPixelDigis
-#	 untracked string ClusterMode  = "pixdigi"
          int32 ChannelThreshold = 2500
          int32 SeedThreshold    = 3000
          double ClusterThreshold = 5050
@@ -13,10 +12,6 @@ include "CondTools/SiPixel/data/SiPixelGainCalibrationService.cfi"
 	using SiPixelGainCalibrationServiceParameters
     }
 
-# Uncomment the line below to use the Gain Calibration from DB. 
-# Nota Bene: Only for private DB tests for the moment
-#
-#replace siPixelClusters.UseCalibDataFromDB = true
 
 
 
