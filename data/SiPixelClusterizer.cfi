@@ -9,6 +9,14 @@ include "CondTools/SiPixel/data/SiPixelGainCalibrationService.cfi"
          untracked bool MissCalibrate   = true
 	 untracked int32 VerbosityLevel = 1		 
 
+         // **************************************
+         // ****  payLoadType Options         ****
+         // ****  HLT - column granularity    ****
+         // ****  Offline - gain:col/ped:pix  ****
+         // **************************************
+
+         string payloadType = "Offline"
+
 	using SiPixelGainCalibrationServiceParameters
     }
 
