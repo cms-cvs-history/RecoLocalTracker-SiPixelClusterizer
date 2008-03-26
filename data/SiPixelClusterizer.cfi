@@ -1,4 +1,4 @@
-#include SiStripNoiseService parameters
+#
 include "CondTools/SiPixel/data/SiPixelGainCalibrationService.cfi"
 
     module siPixelClusters =  SiPixelClusterProducer {
@@ -7,7 +7,6 @@ include "CondTools/SiPixel/data/SiPixelGainCalibrationService.cfi"
          int32 SeedThreshold    = 3000
          double ClusterThreshold = 5050
          untracked bool MissCalibrate   = true
-	 untracked int32 VerbosityLevel = 1		 
 
          // **************************************
          // ****  payLoadType Options         ****
