@@ -7,6 +7,9 @@
 <use name=boost>
 <use name=root>
 
+# to use root histos inside the analyzer
+<use name=PhysicsTools/UtilAlgos>
+
 # for clusters 
 <use name=Geometry/Records>
 <use name=DataFormats/DetId>
