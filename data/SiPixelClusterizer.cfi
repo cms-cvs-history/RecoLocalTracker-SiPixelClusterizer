@@ -2,7 +2,7 @@
 include "CondTools/SiPixel/data/SiPixelGainCalibrationService.cfi"
 
     module siPixelClusters =  SiPixelClusterProducer {
-         InputTag src = siPixelDigis
+         InputTag src = simSiPixelDigis
          int32 ChannelThreshold = 2500
          int32 SeedThreshold    = 3000
          double ClusterThreshold = 5050
