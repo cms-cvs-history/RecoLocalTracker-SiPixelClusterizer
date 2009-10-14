@@ -89,11 +89,14 @@ class PixelThresholdClusterizer : public PixelClusterizerBase {
   float theClusterThreshold;  // Cluster threshold in electrons
   int   theConversionFactor;  // adc to electron conversion factor
   int   theOffset;            // adc to electron conversion offset
+  int   theStackADC;          // The maximum ADC count for the stack layers
+  int   theFirstStack;        // The index of the first stack layer
 
   //! Geometry-related information
   int  theNumOfRows;
   int  theNumOfCols;
   uint32_t detid_;
+  uint32_t layer_;
 
   bool doMissCalibrate; // Use calibration or not
 
