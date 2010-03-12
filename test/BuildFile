@@ -8,6 +8,11 @@
 <use name=boost>
 <use name=root>
 
+# to use for L1 info
+<use name="DataFormats/L1GlobalTrigger">
+<use name="CondFormats/L1TObjects">
+<use name="L1Trigger/GlobalTriggerAnalyzer">
+
 # to use root histos inside the analyzer
 <use name=CommonTools/UtilAlgos>
 
